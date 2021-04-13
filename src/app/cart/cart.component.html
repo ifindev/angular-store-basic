@@ -1,0 +1,77 @@
+<h3>Cart</h3>
+
+<p>
+  <a routerLink="/shipping">Shipping Prices</a>
+</p>
+
+<div class="cart-item" *ngFor="let item of items">
+  <span> {{ item.name }} </span>
+  <span> {{ item.price | currency }} </span>
+
+  <!-- Button trigger delete modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#exampleModalCenter"
+  >
+    <span class="material-icons" style="color: white"> delete </span>
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">
+            Delete item from list
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">Beneran mau hapus item ini dari keranjang?</div>
+        <div class="modal-footer">
+          <button
+            (click)="removeFromCart(item)"
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+          >
+            Yakin hapus
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            Gajadi deh
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout form -->
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name"> Name </label>
+    <input id="name" type="text" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="address"> Address </label>
+    <input id="address" type="text" formControlName="address" />
+  </div>
+
+  <button class="button" type="submit">Purchase</button>
+</form>
